@@ -1,0 +1,208 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h2>Manager Product</h2>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-6">Product code</label>
+        <input type="text" class="form-control col-md-6 product-code" />
+        <input type="hidden" class="product-id" value="0" />
+    </div>
+    <div class="form-group">
+        <label class="col-md-6">Product Name</label>
+        <input type="text" class="form-control col-md-6 product-name" />
+    </div>
+    <div class="form-group">
+        <label class="col-md-6">Category</label>
+        <select class="form-control col-md-6 product-category">
+            <option>Category 1</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-danger btn-addnew" value="Add" />
+    </div>
+</form>
+
+<table class="table product-list">
+    <thead>
+        <tr>
+            <th>Edit / Delete</th>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@* js*@
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+
+        // get category
+        GetAllCategory();
+
+        //get Product
+        GetAllProduct();
+
+        $(".btn-addnew").on("click", function(event) {
+            event.preventDefault();
+            var productcode = $(".product-code").val().trim(),
+                productname = $(".product-name").val().trim(),
+                productcategory = $(".product-category").find("option:selected").val(),
+                productid = $(".product-id").val();
+            //validation
+            if (productcode === "") {
+                alert("please enter product code");
+                return;
+            }
+            if (productname === "") {
+                alert("please enter product code");
+                return;
+            }
+
+            //call ajax
+            var productModel = new Object();
+            productModel.Id = productid;
+            productModel.Code = productcode;
+            productModel.Name = productname;
+            productModel.Idcategory = productcategory;
+            $.ajax({
+                url: '/Product/Addnew',
+                type: "POST",
+                data: JSON.stringify(productModel),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data === 1)
+                        alert("add new success");
+                    else {
+                        alert("Edit success");
+                    }
+                    clearform();
+                    //load data
+                    GetAllProduct();
+                }
+            });
+        });
+
+        //check exit
+        $(".product-code").on("change", function(event) {
+            event.preventDefault();
+            var productcode = $(this).val().trim();
+            if (productcode !== "") {
+                $.ajax({
+                    Type: "GET",
+                    url: '/Product/CheckCode',
+                    data: { code: productcode},
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data === true) {
+                            alert("Code product is exit!");
+                            $(".btn-addnew").attr("disabled", "disabled");
+                        } else {
+                            $(".btn-addnew").removeAttr("disabled");
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    function clearform() {
+        $(".product-code").val(""),
+        $(".product-name").val(""),
+        $(".product-id").val("0");
+    }
+
+    function GetAllCategory() {
+        $.ajax({
+            Type: "GET",
+            url: '/Product/GetAllCategory',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data != null) {
+                    var html = "";
+                    $.each(data, function(k, v) {
+                        html += "<option value=" + v.IdCategory + ">" + v.CategoryName + "</option>";
+                    });
+                    $(".product-category").html(html);
+                }
+            }
+        });
+    }
+
+    function GetAllProduct() {
+        $.ajax({
+            Type: "GET",
+            url: '/Product/GetAllProduct',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data != null) {
+                    var html = "";
+                    $.each(data, function (k, v) {
+                        html += "<tr>";
+                        html += '<td><input type="button" class="btn btn-warning btn-Edit" value="Edit" /> | <input type="button" class="btn btn-danger btn-del" value="Del" /></td>';
+                        html += "<td>" + v.Id + "</td>";
+                        html += "<td>" + v.Code + "</td>";
+                        html += "<td>"+v.Name+"</td>";
+                        html += "<td>" + v.IdCategory + "</td>";
+                        html += "</tr>";
+                    });
+                    $(".product-list").find("tbody").html(html);
+
+                    //bin event btn-edit
+                    binevent();
+                    bineventdel();
+                }
+            }
+        });
+    }
+
+    //edit
+    function binevent() {
+        $(".btn-Edit").on("click", function(event) {
+            event.preventDefault();
+            var obj = $(this).closest("tr");
+            $(".product-code").val(obj.find("td:eq(2)").html().trim()),
+            $(".product-name").val(obj.find("td:eq(3)").html().trim()),
+            $(".product-id").val(obj.find("td:eq(1)").html().trim());
+            $(".product-category").val(obj.find("td:eq(4)").html().trim());
+            $(".btn-addnew").val("Edit");
+        });
+    }
+
+    //del
+    function bineventdel() {
+        $(".btn-del").on("click", function (event) {
+            event.preventDefault();
+            var obj = $(this).closest("tr");
+            if (confirm("are you sure del?")) {
+                $.ajax({
+                    Type: "GET",
+                    url: '/Product/Delete',
+                    data: { id: parseInt(obj.find("td:eq(1)").html().trim()) },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data != null) {
+                            alert("del success");
+                            //load data
+                            GetAllProduct();
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

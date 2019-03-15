@@ -1,0 +1,5 @@
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.Entities\bin\Debug\AutofacExample.Entities.dll
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.Entities\bin\Debug\AutofacExample.Entities.pdb
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.Entities\obj\Debug\AutofacExample.Entities.csproj.CoreCompileInputs.cache
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.Entities\obj\Debug\AutofacExample.Entities.dll
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.Entities\obj\Debug\AutofacExample.Entities.pdb

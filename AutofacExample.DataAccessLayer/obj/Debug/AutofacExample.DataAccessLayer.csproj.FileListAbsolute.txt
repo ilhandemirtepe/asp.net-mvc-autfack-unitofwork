@@ -1,0 +1,12 @@
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\bin\Debug\AutofacExample.DataAccessLayer.dll.config
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\bin\Debug\AutofacExample.DataAccessLayer.dll
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\bin\Debug\AutofacExample.DataAccessLayer.pdb
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\obj\Debug\AutofacExample.DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\obj\Debug\AutofacExample.DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\obj\Debug\AutofacExample.DataAccessLayer.csproj.CopyComplete
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\obj\Debug\AutofacExample.DataAccessLayer.dll
+C:\Users\ilhandemirtepe\source\repos\AutofacExample\AutofacExample.DataAccessLayer\obj\Debug\AutofacExample.DataAccessLayer.pdb
